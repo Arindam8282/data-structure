@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+
 class Node{
   public:
   int data;
@@ -34,14 +35,14 @@ class BST{
     cout<<"\nPostorder data : ";
     Postorder(head);
   }
-  void BSTinsert(Node *root=NULL,int dt=0) {
+  void BSTinsert(int dt,Node *root=NULL) {
     if(head==NULL){
       root = new Node();
       root->data = dt;
       head = root;
     } 
-    else if(dt<root->data && root->left!=NULL) BSTinsert(root->left,dt);
-    else if(dt>root->data && root->right!=NULL) BSTinsert(root->right,dt);
+    else if(dt<root->data && root->left!=NULL) BSTinsert(dt,root->left);
+    else if(dt>root->data && root->right!=NULL) BSTinsert(dt,root->right);
     else if(dt<root->data){
       root->left = new Node();
       root->left->data = dt;
@@ -49,7 +50,6 @@ class BST{
     else if(dt>root->data){
       root->right = new Node();
       root->right->data = dt;
-      return;
     } 
     else {
       cout<<"Bug found";
@@ -68,7 +68,7 @@ int main() {
       case 1:
       cout<<"Enter data : ";
       cin>>data;
-      list->BSTinsert(list->head,data);
+      list->BSTinsert(data,list->head);
       break;
       case 2:
       list->display();
