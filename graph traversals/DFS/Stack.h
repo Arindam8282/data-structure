@@ -1,12 +1,10 @@
-#include<iostream>
 #include<string>
-using namespace std;
 class Node{
   public:
   Node* next;
   Node* prev;
-  string data;
-  Node(string val=" "){
+  int data;
+  Node(int val=0){
     data = val;
     next = NULL;
     prev = NULL;
@@ -15,14 +13,14 @@ class Node{
 //Stack to reuse the linked list 
 class Stack{
  public:
-  int name;
+  string name;
   Node* head = NULL;
   Node* trav = NULL;
-  Stack(int nm="dummy") {
+  Stack(string nm="dummy") {
     name = nm + " stack";
     // cout<<name<<" created\n";
   }
-  void push(string data) {
+  void push(int data) {
      if(head==NULL) {
       head = new Node(data);
     }
@@ -34,10 +32,18 @@ class Stack{
     } 
     // cout<<data<<" pushed successfully into "<<name<<"\n";
   }
-
-  string pop() {
+  bool contains(int dt) {
+    Node *it;
+    it = head;
+    while(it!=NULL) {
+      if(it->data == dt) return true;
+      it = it->next;
+    }
+    return false;
+  }
+  int pop() {
     trav = head;
-    string data;
+    int data;
     if(trav == NULL) cout<<name<<" is empty";
     else if(head->next == NULL){
       // cout<<head->data<<" poped successfully from "<<name<<"\n";
@@ -52,7 +58,7 @@ class Stack{
       trav->next = NULL;
       return data;
     }
-    return "e";
+    return 0;
   }
  
   void display(){
@@ -69,23 +75,23 @@ class Stack{
     }
      
   }
-  string top() {
+  int top() {
     Node* ptr = head;
     if(head == NULL) return NULL;
     while(ptr->next!=NULL) ptr = ptr->next;
     return ptr->data;
   }
-  string getdata() {
-    Node* ptr = head;
-    string str;
-    if(head==NULL) return "";
-    else 
-      while(ptr!=NULL) {
-        str += ptr->data;
-        ptr = ptr->next;
-      }
-    return str;
-  }
+  // int getdata() {
+  //   Node* ptr = head;
+  //   int str;
+  //   if(head==NULL) return "";
+  //   else 
+  //     while(ptr!=NULL) {
+  //       str += ptr->data;
+  //       ptr = ptr->next;
+  //     }
+  //   return str;
+  // }
   bool isempty() {return (head==NULL)?true : false;}
   int length(){
     Node* check = head;
